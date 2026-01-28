@@ -2,9 +2,7 @@
 library(MASS)
 library(dplyr)
 #read the data sets from step2_jackknife
-file_list<-list.files(pattern = "group", all.files = FALSE,
-                        full.names = F, recursive = FALSE,
-                        ignore.case = F, include.dirs = T, no.. = FALSE)
+file_list<-list.files(pattern = "...")
 
 state_list<-unique(sub(".*_", "",sub("_eco.*", "", file_list)))
 #combine the data sets within one state
@@ -21,8 +19,7 @@ for (i in 1:length(file_list_tmp1)){
   write.csv(mydat5, file=paste0("state1_", state, "_eco_", eco, "_group_", group, ".csv"), row.names = F)
 }
   mydat<-bind_rows(lapply(file_list_tmp1, read.csv))  
-  write.csv(mydat, file=paste0("/vol/data/zhuz/dgjang/CDL/range_Mingyue/BLM_eco/group/state_level/state_range_",state,"_group_", group, ".csv"), row.names = F)
-
+  
 }
 }
 

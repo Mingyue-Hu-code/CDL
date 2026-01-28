@@ -3,7 +3,7 @@ library(glmnet)
 library(caret)
 library(pROC)
 #download the data sets from step 2
-file_list<-list.files(pattern = "CDL_", all.files = FALSE,
+file_list<-list.files(pattern = "...", all.files = FALSE,
                         full.names = F, recursive = FALSE,
                         ignore.case = F, include.dirs = T, no.. = FALSE)
 

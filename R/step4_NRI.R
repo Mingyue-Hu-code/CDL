@@ -6,11 +6,11 @@ library(readxl)
 
 
 #download the data sets from step2
-file_list<-list.files(path="...", pattern = "CDL_", all.files = FALSE,
+file_list<-list.files(path="...", pattern = "...", all.files = FALSE,
                       full.names = T, recursive = FALSE,
                       ignore.case = F, include.dirs = T, no.. = FALSE)
 #download the data sets based including the combination information (I have given an example.)
-merged2<-read_excel("Comb_State.xlsx")
+
 
 for(i in 1:nrow(merged2)){
   print(i)

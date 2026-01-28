@@ -9,12 +9,8 @@ library(fastglm)
 library(lattice)
 library(stringr)
 
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
-
-file_list<-list.files(path="...", pattern = "_all_", all.files = FALSE,
-                      full.names = T, recursive = FALSE,
-                      ignore.case = F, include.dirs = T, no.. = FALSE)
+file_list<-list.files(path="...")
 
 state_list<-sub(".*_e_([0-9][0-9])_ecoreg_.*","\\1",file_list)
 
@@ -53,6 +49,5 @@ for(i in 1:length(file_list)){
     )
   
   save(NRI_data, fun_list, file=paste0("CDL_NRI_",state_list[i],".RData"))
-  # write.csv(NRI_data, paste0("CDL_NRI_2017_", state_list[i],".csv"), row.names = F)
   rm(exdata, NRI_data, name_vec, fun_list)
 }

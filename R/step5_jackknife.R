@@ -10,7 +10,7 @@ library(pROC)
 library(coefplot)
 library(fastglm)
 #read the data sets that include the adjusted p_hat
-file_list<-list.files(pattern = "_with_phat_", all.files = FALSE,
+file_list<-list.files(pattern = "...", all.files = FALSE,
                         full.names = F, recursive = FALSE,
                         ignore.case = F, include.dirs = T, no.. = FALSE)
 result_mat1<-NULL
@@ -38,10 +38,8 @@ for(j in county){
 }
 
   colnames(result_mat)<-c("state", "county", "group", "area")
-  write.csv(result_mat, file=paste0("/vol/data/zhuz/dgjang/CDL/range_Mingyue/BLM_eco/group/state_level/p_match/result_county_",state,".csv"), row.names = F) 
   result_mat1<-rbind(result_mat1,result_mat)
 }
 
 colnames(result_mat1)<-c("state", "county", "group", "area")
-write.csv(result_mat1, "result_county1.csv", row.names = F)
 

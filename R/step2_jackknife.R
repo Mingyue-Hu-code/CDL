@@ -10,14 +10,7 @@ library(caret)
 library(pROC)
 library(coefplot)
 library(fastglm)
-#download the model
-eco_list<-sort(sub(".RData","",sub("range_jackknife_","",list.files(pattern = "range_jackknife_", all.files = FALSE,
-                       full.names = F, recursive = FALSE,
-                       ignore.case = F, include.dirs = T, no.. = FALSE))))
-#read the type 2 data sets
-file_list<-list.files(pattern = "ecor_", all.files = FALSE,
-                        full.names = F, recursive = FALSE,
-                        ignore.case = F, include.dirs = T, no.. = FALSE)
+
 
 for(i in 1:length(file_list)){
   print(i)
@@ -37,11 +30,6 @@ for (j in 1:29) {
 
   coef<-coef(myglmnet, s = "lambda.min")[-1,]
   mydat5$X_value<-t(t(coef)%*%t(x_mat))+coef(myglmnet, s = "lambda.min")[1,]
-
-
-  write.csv(mydat5[,c("POINT_X_center", "POINT_Y_center", "P2017", "blm", colnames(mydat5)[substr(colnames(mydat5),1,6)=="county"], 
-"delta", "n_pixel", "range", "p_hat_lasso_min", "X_value")], 
-file=paste0("/vol/data/zhuz/dgjang/CDL/range_Mingyue/BLM_eco/group/state1_", state, "_eco_", eco, "_group_", j, ".csv"), row.names = F)
  
 } 
 }

@@ -11,13 +11,9 @@ library(pROC)
 library(coefplot)
 library(fastglm)
 #download the model 
-eco_list<-sub(".RData","",sub("BLM_range_ecoreg_","",list.files(pattern = "BLM_range_ecoreg_", all.files = FALSE,
-                       full.names = F, recursive = FALSE,
-                       ignore.case = F, include.dirs = T, no.. = FALSE)))
+eco_list<-sub("...")
 #read the CDL matrix data sets
-file_list<-list.files(pattern = "ecor_", all.files = FALSE,
-                        full.names = F, recursive = FALSE,
-                        ignore.case = F, include.dirs = T, no.. = FALSE)
+file_list<-list.files(pattern = "...")
 
 for(i in 1:length(file_list)){
   print(i)
@@ -28,7 +24,7 @@ for(i in 1:length(file_list)){
   #we don't consider the state FL here.
   #calculate the p_hat 
   if(state!="FL"){
-  load(paste0("BLM_range_ecoreg_",eco,".RData"))
+  load(paste0("Range_ecoreg_",eco,".RData"))
   mydat5[,setdiff(row.names(myglmnet$glmnet.fit$beta), colnames(mydat5))]<-0
   range_dat<-mydat5[,c("range",row.names(myglmnet$glmnet.fit$beta))]
   x_mat<-as.matrix(mydat5[,row.names(myglmnet$glmnet.fit$beta)])
@@ -38,9 +34,9 @@ for(i in 1:length(file_list)){
   mydat5$X_value<-t(t(coef)%*%t(x_mat))+coef(myglmnet, s = "lambda.min")[1,]
 
 
-  write.csv(mydat5[,c("POINT_X_center", "POINT_Y_center", "P2017", "blm", colnames(mydat5)[substr(colnames(mydat5),1,6)=="county"], 
+  write.csv(mydat5[,c("POINT_X_center", "POINT_Y_center", "P2017", colnames(mydat5)[substr(colnames(mydat5),1,6)=="county"], 
 "delta", "n_pixel", "range", "p_hat_lasso_min", "X_value")], 
-file=paste0("/vol/data/zhuz/dgjang/CDL/range_Mingyue/BLM_eco/state_", state, "_eco_", eco, "_with_phat_new.csv"), row.names = F)
+file=paste0("..."), row.names = F)
  
 } 
 }

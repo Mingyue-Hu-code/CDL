@@ -9,19 +9,15 @@ library(lattice)
 library(stringr)
 
 #download the NRI datasets generate by Tracy
-file_list<-list.files(path="Q:/projects/nri/annual-update/CDL_Analysis_Files_2023_Fall", pattern = "7.csv", all.files = FALSE,
-                      full.names = T, recursive = FALSE,
-                      ignore.case = F, include.dirs = T, no.. = FALSE)
+file_list<-list.files(path="...")
 #add the State code to the datasets
-state_list<-read.csv("state_level_est.csv")
+state_list<-read.csv("...")
 colnames(state_list)<-"abbr"
-code<-read.csv("State_code.csv")
+code<-read.csv("...")
 state_list<-merge(state_list, code, by = "abbr", all.x = TRUE)
 state_list<-sprintf("%02d", state_list$code)
 #download the datasets with Eco region indicator
-file_list1<-list.files(path="Q:/projects/nri/annual-update/CDL_Analysis_Files_2023_Fall/ecoreg_lvl3_2024", pattern = "vgis", all.files = FALSE,
-                      full.names = T, recursive = FALSE,
-                      ignore.case = F, include.dirs = T, no.. = FALSE)
+file_list1<-list.files(path="...")
 
 
 for(state in state_list){
@@ -46,22 +42,18 @@ for(state in state_list){
 }  
 
 #download new version data sets generate by Tracy
-file_list<-list.files(path="Q:/projects/nri/annual-update/CDL_Analysis_Files_2023_Fall", pattern = "7_rv1.csv", all.files = FALSE,
-                      full.names = T, recursive = FALSE,
-                      ignore.case = F, include.dirs = T, no.. = FALSE)
+file_list<-list.files(path="...")
 New_list<-unique(sub(".*_pt_([0-9][0-9])_cdl_.*","\\1",file_list))
 
-state_list<-read.csv("state_level_est.csv")
+state_list<-read.csv("...")
 colnames(state_list)<-"abbr"
-code<-read.csv("State_code.csv")
+code<-read.csv("...")
 state_list<-merge(state_list, code, by = "abbr", all.x = TRUE)
 state_list<-sprintf("%02d", state_list$code)
 
 state_list1<-intersect(New_list,state_list)
 #with Eco region
-file_list1<-list.files(path="Q:/projects/nri/annual-update/CDL_Analysis_Files_2023_Fall/ecoreg_lvl3_2024", pattern = "vgis", all.files = FALSE,
-                       full.names = T, recursive = FALSE,
-                       ignore.case = F, include.dirs = T, no.. = FALSE)
+file_list1<-list.files(path="...")
 
 #update the data sets
 for(state in state_list1){

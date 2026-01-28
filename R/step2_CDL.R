@@ -2,7 +2,7 @@
 library(MASS)
 library(dplyr)
 #read the data sets that include the p_hat
-file_list<-list.files(pattern = "with", all.files = FALSE,
+file_list<-list.files(pattern = "...", all.files = FALSE,
                         full.names = F, recursive = FALSE,
                         ignore.case = F, include.dirs = T, no.. = FALSE)
 
@@ -20,7 +20,7 @@ for(state in state_list){
   }
   #combine the data sets within one state
   mydat5<-bind_rows(lapply(file_list_tmp, read.csv))
-  write.csv(mydat5, file=paste0("/vol/data/zhuz/dgjang/CDL/range_Mingyue/BLM_eco/state_level/state_range_",state,".csv"), row.names = F)
+  write.csv(mydat5, file=paste0("..."), row.names = F)
 
 }
 

@@ -9,19 +9,11 @@ library(fastglm)
 library(lattice)
 library(stringr)
 
-# library(data.table)
-state_name<-substr(getwd(), nchar(getwd())-1,nchar(getwd()))
-state_num<-sprintf("%02d",as.numeric(substr(list.files(pattern = "_pts_", all.files = FALSE,
-                                        full.names = T, recursive = FALSE,
-                                        ignore.case = F, include.dirs = T, no.. = FALSE)[1], 21, 22)))
 
-load(paste0("CDL_NRI_",state_num,"_Mingyue.RData"))
 
 NRI_data<-NRI_data %>% rename(POINT_X=centroid_x, POINT_Y=centroid_y) %>% dplyr::select(!c(point_id, pasture))
 
-file_list<-list.files(pattern = "_pts_", all.files = FALSE,
-                      full.names = T, recursive = FALSE,
-                      ignore.case = F, include.dirs = T, no.. = FALSE)
+file_list<-list.files(pattern = "...")
 
 mydat4<-NULL;
 
@@ -74,10 +66,9 @@ for(i in 1:length(file_list)){
 mydat4$POINT_X_center<-round(mydat4$POINT_X_center/21, -1)*21
 mydat4$POINT_Y_center<-round(mydat4$POINT_Y_center/21, -1)*21
 
-write.csv(mydat4, file=paste0("CDL_", state_name, "_full_range.csv"), row.names=F)
 ###################
 
-feddat<-feddat<-read.csv("az_cty_fed_epa.csv") # filename should be changed
+feddat<-feddat<-read.csv("....") # filename should be changed
 feddat$POINT_X_center<-round(feddat$POINT_X_center/21, -1)*21
 feddat$POINT_Y_center<-round(feddat$POINT_Y_center/21, -1)*21
 feddat<-feddat[!duplicated(feddat[,c("POINT_X_center", "POINT_Y_center")]), ]  %>% select(-county)
@@ -89,14 +80,5 @@ print(nrow(mydat4))
 mydat4 %>% rename(ECO_LV3=US_L3CODE) ->mydat4
 
 region_vec<-setdiff(unique(mydat4$ECO_LV3), NA)
-
-
-write.csv(mydat4, file=paste0("CDL_",state_name,"_full_eco_range.csv"), row.names = F)
-for(k in region_vec){
-  print(k)
-  write.csv(mydat4[which(mydat4$ECO_LV3==k),], file=paste0("/vol/data/zhuz/dgjang/CDL/range_Mingyue/ecor_", k,"_",state_name,".csv"), row.names=F)
-}
-
-write.csv(mydat4[is.na(mydat4$ECO_LV3),], file=paste0("/vol/data/zhuz/dgjang/CDL/range_Mingyue/ecor_NA_",state_name,".csv"), row.names=F)
 
 

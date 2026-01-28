@@ -3,14 +3,7 @@ library(glmnet)
 library(caret)
 library(pROC)
 #read the type 1 data sets
-file_list<-list.files(pattern = "range_7", all.files = FALSE,
-                      full.names = F, recursive = FALSE,
-                      ignore.case = F, include.dirs = T, no.. = FALSE)
-
-
-eco_list<-sort(sub(".*_","",sub("_range.*","",file_list)))
-#read the GEO order
-geo<-read.csv("pgen2017real_nokillGeoWeight.csv")
+file_list<-list.files(pattern = "...")
 
 geo$state<-sprintf("%02d", geo$state)
 geo$county<-sprintf("%03d", geo$county)
@@ -59,10 +52,6 @@ for(eco in eco_list){
     models[[i]] <- myglmnet
   }
   
-  # At this point, 'models' contains the 29 linear models, each constructed
-  # by excluding one of the groups.
-
-save(models, file=paste0("range_jackknife_",eco,".RData"))
   
 }
 

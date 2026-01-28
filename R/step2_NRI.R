@@ -10,9 +10,7 @@ library(lattice)
 library(stringr)
 
 ########process the uncleaned data from step1
-file_list<-list.files(path="...", pattern = "ecor_", all.files = FALSE,
-                      full.names = T, recursive = FALSE,
-                      ignore.case = F, include.dirs = T, no.. = FALSE)
+file_list<-list.files(path="...")
 
 eco_list<-unique(sub("_state_.*","",sub(".*ecor_","",file_list)))
 

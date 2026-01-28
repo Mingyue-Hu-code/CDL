@@ -3,12 +3,11 @@ library(MASS)
 library(dplyr)
 library(nleqslv)
 #read the data sets from step3_jackknife
-file_list<-list.files(pattern = "_range_", all.files = FALSE,
+file_list<-list.files(pattern = "...", all.files = FALSE,
                         full.names = F, recursive = FALSE,
                         ignore.case = F, include.dirs = T, no.. = FALSE)
 
-code<-read.csv("State_code.csv")
-NRI<-read.csv("Pgen17RangeRepSe.csv")
+
 result_mat<-NULL
 
 state_list<-unique(sub(".*_", "",sub("_group.*", "", file_list)))
@@ -41,15 +40,11 @@ for(state in state_list){
   
   result_mat<-rbind(result_mat, c(state, group, gamma, T_uf, sum(mydat5$p_hat_new*mydat5$n_pixel*(1-mydat5$P2017))*0.2223946))
 
-  write.csv(mydat5, file=paste0("/vol/data/zhuz/dgjang/CDL/range_Mingyue/BLM_eco/group/state_level/p_match/state1_", state,"_group_", group, "_with_phat_match.csv"), row.names = F)
-  
 }
 
 }
 
 colnames(result_mat)<-c("state", "group", "gamma", "NRI", "CDL_match")
-write.csv(result_mat, "result_state_match.csv", row.names = F)
-
 
 
 
